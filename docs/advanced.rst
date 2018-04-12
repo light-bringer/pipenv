@@ -319,6 +319,19 @@ To prevent pipenv from loading the ``.env`` file, set the ``PIPENV_DONT_LOAD_ENV
 
     $ PIPENV_DONT_LOAD_ENV=1 pipenv shell
 
+☤ Custom Script Shortcuts
+-----------------------------
+
+``pipenv`` supports to customize shortcuts in the ``scripts`` section. ``pipenv run`` will automatically load it and find the correct command to replace with. Given the ``Pipfile``::
+
+    [scripts]
+    printfoo = "python -c \"print('foo')\""
+
+You can type in your terminal to run::
+
+    $ pipenv run printfoo
+    foo
+
 ☤ Support for Environment Variables
 -----------------------------------
 
@@ -455,7 +468,7 @@ and external testing::
         pipenv run flake8 --version
         pipenv run flake8 setup.py docs project test
 
-``pipenv`` will automatically use the virtualenv provided by ``tox``.
+``pipenv`` will automatically use the virtualenv provided by ``tox``. If ``pipenv install --dev`` installs e.g. ``pytest``, then installed command ``py.test`` will be present in given virtualenv and can be called directly by ``py.test tests`` instead of ``pipenv run py.test tests``.
 
 You might also want to add ``--ignore-pipfile`` to ``pipenv install``, as to
 not accidentally modify the lock-file on each test run. This causes ``pipenv``
